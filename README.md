@@ -4,7 +4,7 @@
 
 # clt2019-lecture
 <!-- ./Header (auto generated) -->
-Repository to publish lectures for CLT2019.
+Repository to publish the lecture "Deploy your workstation with Ansible" for CLT2019.
 
 ## Motivation
 
@@ -23,6 +23,13 @@ workstation with Ansible".
 ## Requirements
 
 To read this lecture, you need a browser.
+
+The following tools are used to create the presentation.
+
+-  [markdown](https://daringfireball.net/projects/markdown/)
+-  [remark](https://github.com/gnab/remark)
+-  [style-cheat](https://github.com/while-true-do/style-cheat)
+-  [font-awesome](https://fontawesome.com/)
 
 ## Installation
 
