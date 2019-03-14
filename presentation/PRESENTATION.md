@@ -33,6 +33,8 @@ Keep it short.
 -   Demo
 -   Propaganda
 
+You can find all the content at https://github.com/while-true-do/clt2019-lecture
+
 ---
 class: title, middle, center
 
