@@ -1,0 +1,91 @@
+# PRESENTATION.md (11/33)
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    # PRESENTATION.md (18/33)
+    - vm_guest_packages:
+      - open-vm-tools
+      - virtualbox-guest-additions
+      - qemu-guest
+  handlers:
+    # PRESENTATION.md (21/33)
+    - name: Start and Enable tuned
+      service:
+        name: tuned
+        state: started
+        enabled: true
+  tasks:
+    # PRESENTATION.md (13/33)
+    - name: Create User ds
+      user:
+        name: ds
+        comment: Daniel
+        groups: wheel
+        append: True
+        state: present
+    # PRESENTATION.md (14/33)
+    - name: Create Group developers
+      group:
+        name: developers
+        state: present
+    # PRESENTATION.md (16/33)
+    - name: Update System
+      package:
+        name: "*"
+        state: latest
+    # PRESENTATION.md (17/33)
+    - name: Remove Gnome Classic
+      package:
+        name: gnome-classic-session
+        state: absent
+    # PRESENTATION.md (17/33)
+    - name: Remove Anaconda Leftovers
+      package:
+        name: anaconda
+        state: absent
+    # PRESENTATION.md (18/33)
+    - name: Remove VM Guest Packages
+      package:
+        name: "{{ vm_guest_packages }}"
+        state: absent
+    # PRESENTATION.md (19/33)
+    - name: Install tuned
+      package:
+        name: tuned
+        state: present
+      notify: Start and Enable tuned
+    # PRESENTATION.md (25/33)
+    - name: Backup current dconf
+      command: dconf dump / > .config/dconf.dump
+    # PRESENTATION.md (25/33)
+    - name: Copy Wallpaper
+      copy:
+        src: files/wallpaper.jpg
+        dest: /home/ds/pictures/wallpaper.jpg
+        owner: ds
+        group: ds
+    # PRESENTATION.md (26/33)
+    - name: Enable Night Light
+      dconf:
+        user: ds
+        key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+        value: true
+    # PRESENTATION.md (27/33)
+    - name: Set Gnome Wallpaper
+      dconf:
+        user: ds
+        key: /org/gnome/desktop/background/picture-uri
+        value: file:///home/ds/pictures/wallpaper.jpg
+    # PRESENTATION.md (29/33)
+    - name: Add the flathub repository
+      flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    # PRESENTATION.md (30/33)
+    - name: Install Atom Flatpak
+      flatpak:
+        name: io.atom.Atom
+        state: present
