@@ -34,7 +34,7 @@ git clone https://github.com/while-true-do/clt2019-lecture.git
 
 ## Usage
 
-Open the [./presentation/PRESENTATION.html] in your browser.
+Open the [PRESENTATION.html](./presentation/PRESENTATION.html) in your browser.
 
 ## Testing
 
