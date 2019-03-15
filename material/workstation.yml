@@ -8,7 +8,7 @@
     - vm_guest_packages:
       - open-vm-tools
       - virtualbox-guest-additions
-      - qemu-guest
+      - qemu-guest-agent
   handlers:
     # PRESENTATION.md (21/33)
     - name: Start and Enable tuned
@@ -56,28 +56,37 @@
         name: tuned
         state: present
       notify: Start and Enable tuned
+    # Dependencies for dconf module
+    - name: Install psutils
+      package:
+        name: python3-psutil
+        state: present
+
+# Switch User Context
+- hosts: localhost
+  connection: local
+  user: ds
+  tasks:
     # PRESENTATION.md (25/33)
     - name: Backup current dconf
-      command: dconf dump / > .config/dconf.dump
+      command: "dconf dump / > /home/ds/.config/dconf.dump"
     # PRESENTATION.md (25/33)
     - name: Copy Wallpaper
       copy:
         src: files/wallpaper.jpg
-        dest: /home/ds/pictures/wallpaper.jpg
+        dest: /home/ds/Pictures/wallpaper.jpg
         owner: ds
         group: ds
     # PRESENTATION.md (26/33)
     - name: Enable Night Light
       dconf:
-        user: ds
-        key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
-        value: true
+        key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+        value: "true"
     # PRESENTATION.md (27/33)
     - name: Set Gnome Wallpaper
       dconf:
-        user: ds
-        key: /org/gnome/desktop/background/picture-uri
-        value: file:///home/ds/pictures/wallpaper.jpg
+        key: "/org/gnome/desktop/background/picture-uri"
+        value: "'file:///home/ds/Pictures/wallpaper.jpg'"
     # PRESENTATION.md (29/33)
     - name: Add the flathub repository
       flatpak_remote:

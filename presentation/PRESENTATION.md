@@ -33,7 +33,7 @@ Keep it short.
 -   Demo
 -   Propaganda
 
-You can find all the content at https://github.com/while-true-do/clt2019-lecture
+You can find the content at https://github.com/while-true-do/clt2019-lecture
 
 ---
 class: title, middle, center
@@ -51,7 +51,7 @@ Ansible loves repetitive work, that you hate.
 -   Infrastructure Automation
 -   Container (Docker, CRI-O, ...)
 -   Orchestration
--   Workstation Post Installations
+-   Workstation Post Installations(!!!)
 
 ---
 class: title, middle, center
@@ -59,6 +59,9 @@ class: title, middle, center
 ## Use Case(s)
 
 You can automate windows, mac and linux.
+
+???
+Since this is CLT, we focus on Linux.
 
 ---
 class: title, middle, center
@@ -82,6 +85,9 @@ sudo apt-get install ansible
 # SuSE Linux
 sudo zypper install ansible
 ```
+
+???
+Recommendation: pip + virtualenv
 
 ---
 ## <i class="fas fa-terminal fa-fw"></i> Installing Ansible
@@ -236,10 +242,10 @@ It's a piece of cake to use
 ..snip..
 
   vars:
-    - vm_guest_packages:
+    vm_guest_packages:
       - open-vm-tools
       - virtualbox-guest-additions
-      - qemu-guest
+      - qemu-guest-agent
 
   tasks:
     - name: Remove VM Guest Packages
@@ -383,7 +389,7 @@ file.
 ## <i class="fas fa-wrench fa-fw"></i> Configuration
 
 Maybe, you want to enable Gnomes Night Light Feature via
-[dconf]https://docs.ansible.com/ansible/latest/modules/dconf_module.html.
+[dconf](https://docs.ansible.com/ansible/latest/modules/dconf_module.html).
 
 ```
 # workstation.yml
@@ -393,9 +399,8 @@ Maybe, you want to enable Gnomes Night Light Feature via
   tasks:
     - name: Enable Night Light
       dconf:
-        user: ds
-        key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
-        value: true
+        key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+        value: "true"
 ..snap..
 ```
 ---
@@ -411,9 +416,8 @@ Maybe, you want to set a wallpaper.
   tasks:
     - name: Set Gnome Wallpaper
       dconf:
-        user: ds
-        key: /org/gnome/desktop/background/picture-uri
-        value: file:///home/ds/pictures/wallpaper.jpg
+        key: "/org/gnome/desktop/background/picture-uri"
+        value: "'file:///home/ds/Pictures/wallpaper.jpg'"
 
 ..snap..
 ```
