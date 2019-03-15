@@ -31,6 +31,9 @@ The following tools are used to create the presentation.
 -  [style-cheat](https://github.com/while-true-do/style-cheat)
 -  [font-awesome](https://fontawesome.com/)
 
+To execute the Demo, you will need [Ansible](https://www.ansible.com). The
+installation of Ansible is described in the presentation.
+
 ## Installation
 
 Install from git:
@@ -41,7 +44,21 @@ git clone https://github.com/while-true-do/clt2019-lecture.git
 
 ## Usage
 
+The repository contains 2 parts. The presentation and a demo.
+
+### Presentation
+
 Open the [PRESENTATION.html](./presentation/PRESENTATION.html) in your browser.
+
+### Demo
+
+Adjust user and paths beforehand in [workstation.yml](./material/workstation.yml).
+The playbook is written for a [Fedora workstation](https://getfedora.org), but
+can be adjusted easily for other distributions.
+
+```
+ansible-playbook -K workstation.yml
+```
 
 ## Testing
 
