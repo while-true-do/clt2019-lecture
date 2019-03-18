@@ -4,7 +4,7 @@
 
 # clt2019-lecture
 <!-- ./Header (auto generated) -->
-Repository to publish the lecture "Deploy your workstation with Ansible" for CLT2019.
+Repository to publish the lecture "Setup your workstation with Ansible" for CLT2019.
 
 ## Motivation
 

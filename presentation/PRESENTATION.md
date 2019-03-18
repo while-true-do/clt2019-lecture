@@ -1,7 +1,7 @@
 class: title, middle, center
 <!-- css classes -->
 
-# Deploy your workstation with Ansible
+# Setup your workstation with Ansible
 
 <!-- Notes -->
 ???
